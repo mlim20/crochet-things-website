@@ -131,3 +131,7 @@ main {
 #dots .active, #dot:hover {
     background-color: #717171;
 }
+
+.content {
+    scroll-margin-top: 60px;
+}

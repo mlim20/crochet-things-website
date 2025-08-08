@@ -1,4 +1,5 @@
-// document.addEventListener("DOMContentLoaded", showSlideshow(0));
+window.addEventListener("scroll", activeScroll);
+
 let currentIdx = 0;
 showSlideshow(currentIdx);
 
@@ -42,4 +43,24 @@ function showSlideshow(current) {
     // show correct slide and set dot to active
     slides[currentIdx].style.display = "block";
     dots[currentIdx].className += " active";
+}
+
+// adapted from CodzSword (https://www.youtube.com/watch?v=lLPoX0nUmyc)
+function activeScroll() {
+    const currentScroll = window.scrollY;
+    const sections = document.querySelectorAll("section[id].content");
+    // const navHeight = document.getElementById("navbar").offsetHeight;
+
+    sections.forEach((section) => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 90;
+        const id = section.getAttribute("id");
+        const currentNav = document.querySelector(`#navbar a[href*="#${id}"]`);
+
+        if (currentScroll > sectionTop && currentScroll <= sectionTop + sectionHeight) {
+            currentNav.classList.add("active");
+        } else {
+            currentNav.classList.remove("active");
+        }
+    })
 }
